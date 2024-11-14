@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int maxStudentCount = 100;
+
+struct Student {
+    int id;
+    string name;
+    float grade;
+};
+
+void addStudent(Student students[], int& count, int id, const string& name, float grade) {
+    if (count < maxStudentCount) {  
+        students[count].id = id;
+        students[count].name = name;
+        students[count].grade = grade;
+        count++;
+    } else {
+        cout << "Student list is full!" << endl;
+    }
+}
+
+void displayStudents(const Student students[], int count) {
+    for (int i = 0; i < count; ++i) {
+        cout << "ID: " << students[i].id << ", Name: " << students[i].name
+             << ", Grade: " << students[i].grade << endl;
+    }
+}
+
+int main() {
+    Student students[maxStudentCount]; // Array of 100 students
+    int studentCount = 0;
+
+    addStudent(students, studentCount, 240014, "Anvar", 85.5f);
+    addStudent(students, studentCount, 240811, "Bobur", 92.0f);
+    addStudent(students, studentCount, 240005, "Charos", 76.3f);
+
+    cout << "Student List:" << endl;
+    displayStudents(students, studentCount);
+
+    return 0;
+}
