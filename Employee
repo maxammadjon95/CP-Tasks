@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+struct Employee {
+    int id;
+    string name;
+    char* department;
+};
+
+Employee createEmployee(int id, const string& name, const char* department) {
+    Employee emp;
+    emp.id = id;
+    emp.name = name;
+    emp.department = new char[strlen(department) + 1];
+    strcpy(emp.department, department);
+    return emp;
+}
+
+Employee copyEmployee(const Employee& emp) {
+    Employee empCopy;
+    empCopy.id = emp.id;
+    empCopy.name = emp.name;
+    empCopy.department = new char[strlen(emp.department) + 1];
+    strcpy(empCopy.department, emp.department);
+    return empCopy;
+}
+
+void displayEmployee(const Employee& emp) {
+    cout << "ID: " << emp.id << ", Name: " << emp.name
+         << ", Department: " << emp.department << endl;
+}
+
+int main() {
+    Employee emp1 = createEmployee(101, "Maxi", "Engineering");
+
+    Employee emp2 = copyEmployee(emp1);
+
+    strcpy(emp1.department, "Sales");
+
+    cout << "Original Employee after modification:" << endl;
+    displayEmployee(emp1);
+
+    cout << "Copied Employee:" << endl;
+    displayEmployee(emp2);
+
+    delete[] emp1.department;
+    delete[] emp2.department;
+
+    return 0;
+}
