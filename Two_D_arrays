@@ -1,0 +1,52 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+    int m, n;
+
+    // Input rows and columns
+    cout << "Enter the number of rows (m): ";
+    cin >> m;
+    cout << "Enter the number of columns (n): ";
+    cin >> n;
+
+    // Declare a 2D array with a maximum size 
+    int a[100][100]; // Ensure m and n do not exceed 100
+
+    // Fill the array with 1s
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            a[i][j] = 1;
+        }
+    }
+
+    // Create the snake-like pattern (set some elements to 0)
+    int direction = 1; // 1 for moving right, -1 for moving left
+    for (int i = 0; i < m; i++) {
+        if (direction == 1) { // Fill the row moving right
+            for (int j = 0; j < n; j++) {
+                if (j % 2 == 0) // Example condition: Set every other element to 0
+                    a[i][j] = 0;
+            }
+        } else { // Fill the row moving left
+            for (int j = n - 1; j >= 0; j--) {
+                if (j % 2 == 0) // Example condition: Set every other element to 0
+                    a[i][j] = 0;
+            }
+        }
+        direction *= -1; // Reverse direction for the next row
+    }
+
+    // Display the array using setw() for formatting
+    cout << "\nSnake-like pattern:\n";
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << setw(3) << a[i][j];
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
