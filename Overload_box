@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+class Box {
+private:
+    double length;
+    double width;
+    double height;
+
+public:
+    // Constructor
+    Box(double l, double w, double h) : length(l), width(w), height(h) {}
+
+    // Overload the '+' operator
+    Box operator+(const Box& other) {
+        return Box(length + other.length, width + other.width, height + other.height);
+    }
+
+    // Function to calculate the volume
+    double calculateVolume() {
+        return length * width * height;
+    }
+
+    // Function to display dimensions
+    void display() {
+        cout << "Length = " << length << ", Width = " << width << ", Height = " << height << endl;
+    }
+};
+
+int main() {
+    // Create two Box objects
+    Box box1(3, 4, 5);
+    Box box2(6, 7, 8);
+
+    // Display original boxes
+    cout << "Box 1: ";
+    box1.display();
+    cout << "Box 2: ";
+    box2.display();
+
+    // Combine the boxes using the '+' operator
+    Box combinedBox = box1 + box2;
+
+    // Display the combined box
+    cout << "Combined Box: ";
+    combinedBox.display();
+
+    // Calculate and display the volume of the combined box
+    cout << "Volume of Combined Box: " << combinedBox.calculateVolume() << endl;
+
+    return 0;
+}
