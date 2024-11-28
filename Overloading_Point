@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+class Point {
+    int x, y;
+
+public:
+    // Constructor
+    Point(int x = 0, int y = 0) : x(x), y(y) {}
+
+    // Overloading '-' operator
+    Point operator-(const Point& p) const {
+        return Point(x - p.x, y - p.y);
+    }
+
+    void display() const {
+        cout << "(" << x << ", " << y << ")";
+    }
+};
+
+int main() {
+    Point p1(5, 7), p2(3, 4);
+    Point result = p1 - p2;
+    cout << "Result of p1 - p2: ";
+    result.display();
+    return 0;
+}
