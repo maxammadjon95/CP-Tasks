@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student {
+    string name;
+    int grade;
+
+public:
+    // Constructor
+    Student(string name, int grade) : name(name), grade(grade) {}
+
+    // Overload '<' operator for comparison by grade
+    bool operator<(const Student& s) const {
+        return grade < s.grade;
+    }
+
+    void display() const {
+        cout << "Name: " << name << ", Grade: " << grade << endl;
+    }
+};
+
+int main() {
+    Student s1("Alice", 85), s2("Bob", 90);
+    if (s1 < s2) {
+        cout << s1.name << " has a lower grade than " << s2.name << endl;
+    } else {
+        cout << s1.name << " has a higher or equal grade compared to " << s2.name << endl;
+    }
+    return 0;
+}
