@@ -3,7 +3,7 @@
 using namespace std;
 
 class Student {
-    string name;
+    public: string name;
     int grade;
 
 public:
@@ -21,7 +21,7 @@ public:
 };
 
 int main() {
-    Student s1("Alice", 85), s2("Bob", 90);
+    Student s1("Anvar", 85), s2("Bobur", 90);
     if (s1 < s2) {
         cout << s1.name << " has a lower grade than " << s2.name << endl;
     } else {
