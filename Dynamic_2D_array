@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Matrix {
+private:
+    vector<vector<int>> data;
+
+public:
+    Matrix(int rows, int cols) {
+        data.resize(rows, vector<int>(cols, 0));
+    }
+
+    void resizeMatrix(int rows, int cols) {
+        data.resize(rows); 
+        for (auto& row : data) {
+            row.resize(cols, 0); 
+        }
+    }
+
+    void setElement(int row, int col, int value) {
+        if (row >= 0 && row < data.size() && col >= 0 && col < data[row].size()) {
+            data[row][col] = value;
+        } else {
+            cout << "Invalid indices!" << endl;
+        }
+    }
+
+    int getElement(int row, int col) {
+        if (row >= 0 && row < data.size() && col >= 0 && col < data[row].size()) {
+            return data[row][col];
+        } else {
+            cout << "Invalid indices!" << endl;
+            return -1; // Return an invalid value
+        }
+    }
+
+    void printMatrix() {
+        for (const auto& row : data) {
+            for (const auto& elem : row) {
+                cout << elem << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    Matrix mat(3, 3);
+
+    mat.setElement(0, 0, 1);
+    mat.setElement(1, 1, 5);
+    mat.setElement(2, 2, 9);
+
+    cout << "Initial Matrix:" << endl;
+    mat.printMatrix();
+
+    mat.resizeMatrix(4, 4);
+
+    mat.setElement(3, 3, 16);
+
+    cout << "\nResized Matrix:" << endl;
+    mat.printMatrix();
+
+    cout << "\nElement at (3, 3): " << mat.getElement(3, 3) << endl;
+
+    return 0;
+}
