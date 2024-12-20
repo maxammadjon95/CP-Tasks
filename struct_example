@@ -1,0 +1,55 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+struct Student {
+    string name;
+    int id;
+    int marks[3];
+};
+
+void calculateAndDisplayAverage(Student students[], int numStudents) {
+    cout << left << setw(15) << "Name" << setw(10) << "ID" << setw(10) << "Average" << endl;
+    cout << string(35, '-') << endl;
+
+    for (int i = 0; i < numStudents; ++i) {
+        int sum = 0;
+        for (int j = 0; j < 3; ++j) {
+            sum += students[i].marks[j];
+        }
+        double average = static_cast<double>(sum) / 3;
+
+        cout << left << setw(15) << students[i].name
+             << setw(10) << students[i].id
+             << fixed << setprecision(2) << average << endl;
+    }
+}
+
+int main() {
+    int numStudents;
+    cout << "Enter the number of students: ";
+    cin >> numStudents;
+
+    Student* students = new Student[numStudents];
+
+    for (int i = 0; i < numStudents; ++i) {
+        cout << "\nEnter details for student " << i + 1 << ":" << endl;
+        cout << "Name: ";
+        cin >> ws; 
+        getline(cin, students[i].name);
+        cout << "ID: ";
+        cin >> students[i].id;
+        cout << "Enter marks for 3 subjects: ";
+        for (int j = 0; j < 3; ++j) {
+            cin >> students[i].marks[j];
+        }
+    }
+
+    cout << "\nStudent Details with Average Marks:\n";
+    calculateAndDisplayAverage(students, numStudents);
+
+    delete[] students;
+
+    return 0;
+}
