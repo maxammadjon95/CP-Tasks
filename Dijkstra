@@ -1,0 +1,72 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+const int INF = 1e9;
+const int N = 10; // Grid size
+int grid[N][N] = {
+    {0, 0, 1, 0, 0, 0, 1, 0, 0, 0},
+    {0, 1, 0, 0, 1, 0, 1, 1, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+    {0, 1, 1, 0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0, 1, 0, 0},
+    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 1, 1, 0, 0, 0, 1, 0},
+    {0, 1, 0, 0, 0, 1, 0, 1, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+    {0, 0, 1, 0, 0, 0, 1, 0, 0, 0}
+};
+
+struct Node {
+    int x, y, dist;
+    bool operator>(const Node& other) const {
+        return dist > other.dist;
+    }
+};
+
+int dx[] = {0, 0, 1, -1};
+int dy[] = {1, -1, 0, 0};
+
+bool isValid(int x, int y) {
+    return x >= 0 && x < N && y >= 0 && y < N && grid[x][y] == 0;
+}
+
+void dijkstra(int startX, int startY, int goalX, int goalY) {
+    priority_queue<Node, vector<Node>, greater<Node>> pq;
+    vector<vector<int>> dist(N, vector<int>(N, INF));
+    dist[startX][startY] = 0;
+    pq.push({startX, startY, 0});
+
+    while (!pq.empty()) {
+        Node node = pq.top();
+        pq.pop();
+
+        if (node.x == goalX && node.y == goalY) {
+            cout << "Shortest path using Dijkstra: " << node.dist << " moves" << endl;
+            return;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int nx = node.x + dx[i];
+            int ny = node.y + dy[i];
+
+            if (isValid(nx, ny) && dist[nx][ny] > node.dist + 1) {
+                dist[nx][ny] = node.dist + 1;
+                pq.push({nx, ny, dist[nx][ny]});
+            }
+        }
+    }
+
+    cout << "No path found!" << endl;
+}
+
+int main() {
+    int startX = 0, startY = 0;
+    int goalX = 9, goalY = 9;
+
+    dijkstra(startX, startY, goalX, goalY);
+
+    return 0;
+}
