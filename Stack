@@ -1,3 +1,6 @@
+#include <iostream>
+using namespace std;
+
 #define MAX 100
 
 class StackArray {
@@ -23,7 +26,7 @@ public:
             cout << "Stack Underflow\n";
             return;
         }
-        top--;
+        cout << "Popped: " << arr[top--] << endl;
     }
 
     int peek() {
@@ -37,4 +40,115 @@ public:
     bool is_empty() {
         return top == -1;
     }
+
+    void display() {
+        if (top < 0) {
+            cout << "Stack is Empty\n";
+            return;
+        }
+        cout << "Stack (top to bottom): ";
+        for (int i = top; i >= 0; i--) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
 };
+
+int main() {
+    StackArray stack;
+
+    stack.push(10);
+    stack.push(20);
+    stack.push(30);
+    stack.display();
+
+    cout << "Top element: " << stack.peek() << endl;
+
+    stack.pop();
+    stack.display();
+
+    return 0;
+}
+
+/*
+
+#include <iostream>
+using namespace std;
+
+class StackNode {
+public:
+    int data;
+    StackNode* next;
+
+    StackNode(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class StackList {
+private:
+    StackNode* top;
+
+public:
+    StackList() {
+        top = nullptr;
+    }
+
+    void push(int val) {
+        StackNode* new_node = new StackNode(val);
+        new_node->next = top;
+        top = new_node;
+    }
+
+    void pop() {
+        if (!top) {
+            cout << "Stack Underflow\n";
+            return;
+        }
+        cout << "Popped: " << top->data << endl;
+        StackNode* to_delete = top;
+        top = top->next;
+        delete to_delete;
+    }
+
+    int peek() {
+        if (!top) {
+            cout << "Stack is Empty\n";
+            return -1;
+        }
+        return top->data;
+    }
+
+    bool is_empty() {
+        return top == nullptr;
+    }
+
+    void display() {
+        StackNode* temp = top;
+        cout << "Stack (top to bottom): ";
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    StackList stack;
+
+    stack.push(100);
+    stack.push(200);
+    stack.push(300);
+    stack.display();
+
+    cout << "Top element: " << stack.peek() << endl;
+
+    stack.pop();
+    stack.display();
+
+    return 0;
+}
+
+*/
