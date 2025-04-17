@@ -1,0 +1,40 @@
+#define MAX 100
+
+class StackArray {
+private:
+    int arr[MAX];
+    int top;
+
+public:
+    StackArray() {
+        top = -1;
+    }
+
+    void push(int val) {
+        if (top >= MAX - 1) {
+            cout << "Stack Overflow\n";
+            return;
+        }
+        arr[++top] = val;
+    }
+
+    void pop() {
+        if (top < 0) {
+            cout << "Stack Underflow\n";
+            return;
+        }
+        top--;
+    }
+
+    int peek() {
+        if (top < 0) {
+            cout << "Stack is Empty\n";
+            return -1;
+        }
+        return arr[top];
+    }
+
+    bool is_empty() {
+        return top == -1;
+    }
+};
